@@ -34,6 +34,7 @@ val repositories: MutableState<List<Repository>> = mutableStateOf(ArrayList())
 
 @Composable
 fun RepositoryPage(dashboard: DashboardActivity, viewModel: RepositoryViewModel) {
+    viewModel.getRepositories()
 
     PageContent()
 

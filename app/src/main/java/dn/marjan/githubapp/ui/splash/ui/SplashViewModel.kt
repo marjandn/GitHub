@@ -18,10 +18,6 @@ class SplashViewModel @Inject constructor(
     val dispatcherProvider: CoroutineDispatcherProvider
 ) : BaseViewModel() {
 
-    init {
-        checkUserLogin()
-    }
-
     private var _splashResponse = MutableLiveData<Resource<Boolean>>()
 
     val splashResponse: LiveData<Resource<Boolean>>

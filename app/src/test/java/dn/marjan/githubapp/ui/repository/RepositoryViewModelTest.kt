@@ -1,9 +1,11 @@
 package dn.marjan.githubapp.ui.repository
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.lifecycle.Observer
 import dn.marjan.githubapp.ApplicationTest
 import dn.marjan.githubapp.data.Error
 import dn.marjan.githubapp.data.ErrorResource
+import dn.marjan.githubapp.data.Resource
 import dn.marjan.githubapp.data.SuccessResource
 import dn.marjan.githubapp.di.component.DaggerTestAppComponent
 import dn.marjan.githubapp.di.component.TestAppComponent
@@ -11,6 +13,10 @@ import dn.marjan.githubapp.entity.Repository
 import dn.marjan.githubapp.ui.repository.repo.RepoRepository
 import dn.marjan.githubapp.ui.repository.ui.RepositoryViewModel
 import io.mockk.coEvery
+import io.mockk.every
+import io.mockk.impl.annotations.MockK
+import io.mockk.junit4.MockKRule
+import io.mockk.justRun
 import io.mockk.mockk
 import okhttp3.MediaType
 import okhttp3.ResponseBody
@@ -43,6 +49,7 @@ class RepositoryViewModelTest {
         val component: TestAppComponent =
             DaggerTestAppComponent.builder().application(ApplicationTest()).build()
         component.inject(this)
+//        repoViewModel.repoResponse.observeForever(repoResponse)
     }
 
     @Test
@@ -50,7 +57,7 @@ class RepositoryViewModelTest {
         // Given
         val fakeUsername = "fake.username"
         val reposList = mockk<List<Repository>>()
-        coEvery { repoRepository.getUsername() } returns fakeUsername
+        every { repoRepository.getUsername() } returns fakeUsername
         coEvery { repoRepository.getRepositories(fakeUsername) } returns reposList
 
         // When
@@ -66,7 +73,7 @@ class RepositoryViewModelTest {
     fun `onGetRepositories, FailedResponse`() {
         // Given
         val fakeUsername = "fake.username"
-        coEvery { repoRepository.getUsername() } returns fakeUsername
+        every { repoRepository.getUsername() } returns  fakeUsername
         coEvery { repoRepository.getRepositories(fakeUsername) } throws  HttpException(
             Response.error<HttpException>(
                 500,

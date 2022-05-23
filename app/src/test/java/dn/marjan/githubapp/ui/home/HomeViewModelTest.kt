@@ -13,6 +13,7 @@ import dn.marjan.githubapp.entity.ReceivedEvents
 import dn.marjan.githubapp.ui.home.repo.HomeRepository
 import dn.marjan.githubapp.ui.home.ui.HomeViewModel
 import io.mockk.coEvery
+import io.mockk.impl.annotations.MockK
 import io.mockk.mockk
 import okhttp3.MediaType
 import okhttp3.ResponseBody
@@ -20,16 +21,11 @@ import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.Mock
-import org.mockito.Mockito
-import org.mockito.junit.MockitoJUnitRunner
 import retrofit2.HttpException
 import retrofit2.Response
 import javax.inject.Inject
 
 
-@RunWith(MockitoJUnitRunner::class)
 class HomeViewModelTest {
 
     /*
@@ -46,16 +42,12 @@ class HomeViewModelTest {
     @Inject
     lateinit var homeViewModel: HomeViewModel
 
-    @Mock
-    lateinit var homeResponse: Observer<Resource<List<ReceivedEvents>>>
-
     @Before
     fun setup() {
         val component: TestAppComponent =
             DaggerTestAppComponent.builder().application(ApplicationTest()).build()
         component.inject(this)
 
-        homeViewModel.homeResponse.observeForever(homeResponse)
     }
 
     @Test

@@ -25,10 +25,6 @@ class RepositoryViewModel @Inject constructor(
     val repoResponse: LiveData<Resource<List<Repository>>>
         get() = _repoResponse
 
-    init {
-        getRepositories()
-    }
-
     fun getRepositories(){
         viewModelScope.launch(dispatcherProvider.IO()) {
             try{

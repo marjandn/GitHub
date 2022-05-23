@@ -21,6 +21,11 @@ class RepositoryModule {
 
     @Singleton
     @Provides
+    fun provideProfileRepository(localDataService: LocalDataService): ProfileRepository =
+        ProfileRepositoryImp(localDataService = localDataService)
+
+    @Singleton
+    @Provides
     fun provideLoginRepository(
         localDataService: LocalDataService,
         remoteDataService: RemoteDataService
@@ -48,8 +53,4 @@ class RepositoryModule {
     fun provideSplashRepository(localDataService: LocalDataService): SplashRepository =
         SplashRepositoryImp(localDataService = localDataService)
 
-    @Singleton
-    @Provides
-    fun provideProfileRepository(localDataService: LocalDataService): ProfileRepository =
-        ProfileRepositoryImp(localDataService = localDataService)
 }

@@ -11,16 +11,14 @@ import dn.marjan.githubapp.di.component.DaggerTestAppComponent
 import dn.marjan.githubapp.di.component.TestAppComponent
 import dn.marjan.githubapp.entity.UserInfo
 import dn.marjan.githubapp.ui.login.repo.LoginRepositoryImp
+import io.mockk.*
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.Mockito.*
-import org.mockito.junit.MockitoJUnitRunner
+import org.mockito.ArgumentMatchers.anyString
 import javax.inject.Inject
 
 
-@RunWith(MockitoJUnitRunner::class)
 class LoginRepositoryTest {
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()
@@ -40,12 +38,15 @@ class LoginRepositoryTest {
     fun `saveUserData, should save User info`() {
         // Given
         val userInfo: UserInfo = UserInfo()
-        val sharedPreferences: SharedPreferences = mock(SharedPreferences::class.java)
-        val sharedPreferencesEditor: SharedPreferences.Editor =  mock(SharedPreferences.Editor::class.java)
-        val context = mock(Context::class.java)
+        val sharedPreferences: SharedPreferences = mockkClass(SharedPreferences::class)
+        val sharedPreferencesEditor: SharedPreferences.Editor = mockkClass(SharedPreferences.Editor::class)
+        val context = mockk<Context>()
+        every { context.packageName } returns "dn.marjan.githubapp"
+        every { context.getSharedPreferences("dn.marjan.githubapp_preferences" , 0) } returns sharedPreferences
 
-        `when`(PreferenceManager.getDefaultSharedPreferences(context)).thenReturn(sharedPreferences)
-        `when`(sharedPreferences.edit()).thenReturn(sharedPreferencesEditor)
+        every { PreferenceManager.getDefaultSharedPreferences(context) } returns sharedPreferences
+        every { sharedPreferences.edit() } returns sharedPreferencesEditor
+        justRun { sharedPreferencesEditor.putString(anyString() , anyString()) }
 
 
         // When
@@ -54,8 +55,8 @@ class LoginRepositoryTest {
         rep.saveUserData(userInfo)
 
         // Then
-        verify(sharedPreferencesEditor, times(10)).putString(any(), anyString())
-        verify(sharedPreferencesEditor, times(10)).apply()
+        verify(exactly = 10) { sharedPreferencesEditor.putString(any(), any()) }
+        verify(exactly = 10) { sharedPreferencesEditor.apply() }
 
     }
 

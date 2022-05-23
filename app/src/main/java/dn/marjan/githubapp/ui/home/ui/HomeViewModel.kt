@@ -21,12 +21,6 @@ class HomeViewModel @Inject constructor(
     val dispatcher: CoroutineDispatcherProvider
 ) : BaseViewModel() {
 
-    init {
-        getReceivedEvents()
-    }
-
-
-
 
     private val _homeResponse = MutableLiveData<Resource<List<ReceivedEvents>>>()
 

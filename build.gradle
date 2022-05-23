@@ -1,9 +1,13 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     ext {
-        compose_version = '1.0.5'
-        dagger_version = '2.40.5'
-        mockkito_version = '1.12.2'
+        kotlinVersion = '1.6.10'
+        lifecycleVersion = '2.4.1'
+        composeVersion = '1.1.1'
+        daggerVersion = '2.40.5'
+        jUnitVersion = '4.13.2'
+        mockkVersion = '1.12.4'
+        androidXTestVersion = '1.4.0'
     }
     repositories {
         google()
@@ -11,7 +15,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:7.2.0'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
     }
 }
 

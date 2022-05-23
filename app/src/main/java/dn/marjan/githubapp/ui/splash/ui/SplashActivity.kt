@@ -31,6 +31,7 @@ class SplashActivity : BaseActivity<SplashViewModel>() {
 
     @Composable
     override fun ProvideCompose() {
+        viewModel.checkUserLogin()
         ContentUI()
 
         viewModel.splashResponse.observe(this) {

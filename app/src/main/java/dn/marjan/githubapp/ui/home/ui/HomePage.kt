@@ -28,7 +28,7 @@ val receivedEvents: MutableState<List<ReceivedEvents>> = mutableStateOf(ArrayLis
 
 @Composable
 fun HomePage(dashboard: DashboardActivity, viewModel: HomeViewModel) {
-    viewModel.justLog()
+    viewModel. getReceivedEvents()
 
     PageContent()
 

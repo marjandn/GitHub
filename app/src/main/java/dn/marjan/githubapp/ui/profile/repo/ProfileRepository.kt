@@ -1,6 +1,5 @@
 package dn.marjan.githubapp.ui.profile.repo
 
-import dn.marjan.githubapp.entity.UserInfo
 
 interface ProfileRepository {
 

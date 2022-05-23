@@ -6,13 +6,22 @@ import dn.marjan.githubapp.data.local.LocalDataService
 import dn.marjan.githubapp.data.remote.RemoteDataService
 import dn.marjan.githubapp.ui.home.repo.HomeRepository
 import dn.marjan.githubapp.ui.login.repo.LoginRepository
+import dn.marjan.githubapp.ui.profile.repo.ProfileRepository
 import dn.marjan.githubapp.ui.repository.repo.RepoRepository
 import dn.marjan.githubapp.ui.splash.repo.SplashRepository
+import dn.marjan.githubapp.ui.splash.repo.SplashRepositoryImp
 import io.mockk.mockk
+import io.mockk.spyk
 import javax.inject.Singleton
 
 @Module
 class RepositoryModuleTest {
+
+    @Singleton
+    @Provides
+    fun provideProfileRepository(
+        localDataService: LocalDataService,
+    ): ProfileRepository = mockk()
 
     @Singleton
     @Provides
@@ -40,5 +49,5 @@ class RepositoryModuleTest {
     @Provides
     fun provideSplashRepository(
         localDataService: LocalDataService
-    ): SplashRepository = mockk()
+    ): SplashRepository = mockk( )
 }

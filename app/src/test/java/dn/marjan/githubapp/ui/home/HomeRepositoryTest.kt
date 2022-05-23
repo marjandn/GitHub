@@ -1,28 +1,19 @@
 package dn.marjan.githubapp.ui.home
 
 import android.content.Context
-import android.content.SharedPreferences
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.preference.PreferenceManager
 import dn.marjan.githubapp.ApplicationTest
 import dn.marjan.githubapp.data.local.LocalDataService
 import dn.marjan.githubapp.di.component.DaggerTestAppComponent
 import dn.marjan.githubapp.di.component.TestAppComponent
 import dn.marjan.githubapp.ui.home.repo.HomeRepository
 import io.mockk.coEvery
-import io.mockk.coVerify
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.Mockito
-import org.mockito.Mockito.`when`
-import org.mockito.Mockito.mock
-import org.mockito.junit.MockitoJUnitRunner
 import javax.inject.Inject
 
-@RunWith(MockitoJUnitRunner::class)
 class HomeRepositoryTest {
 
     /*
